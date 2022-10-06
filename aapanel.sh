@@ -26,6 +26,7 @@ rm /www/server/panel/data/repair.json
 cd /www/server/panel/data
 wget https://raw.githubusercontent.com/DauDau432/Aapanel-Crack/main/repair.json
 chattr +i /www/server/panel/data/repair.json
+bt 1
 }
 function delete-log(){
 echo "" > /www/server/panel/script/site_task.py
