@@ -5,6 +5,7 @@ echo ""
 echo "   Chọn hệ điều hành phù hợp!"
 echo "   1. Centos"
 echo "   2. Ubuntu"
+echo "   3. Quay lại"
 echo "--------------------------------"
 read -p "   Vui Lòng Nhập: " num
 
@@ -13,6 +14,8 @@ read -p "   Vui Lòng Nhập: " num
         ;;
         2) wget -O install.sh http://www.aapanel.com/script/install-ubuntu_6.0_en.sh && sudo bash install.sh aapanel
         ;;
+	3) start_menu
+	;;
         *) install
         ;;
     esac
