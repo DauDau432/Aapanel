@@ -1,9 +1,12 @@
 #! /bin/bash
 function install(){
 clear
+echo ""
+echo "   Chọn hệ điều hành phù hợp!"
 echo "   1. Centos"
 echo "   2. Ubuntu"
-read -p "  Vui Lòng Nhập : " num
+echo "--------------------------------"
+read -p "   Vui Lòng Nhập: " num
 
     case "${num}" in
         1) yum install -y wget && wget -O install.sh http://www.aapanel.com/script/install_6.0_en.sh && bash install.sh aapanel
@@ -21,7 +24,7 @@ chattr +i /www/server/panel/data/plugin.json
 chattr -i /www/server/panel/data/repair.json
 rm /www/server/panel/data/repair.json
 cd /www/server/panel/data
-wget https://ghproxy.com/https://raw.githubusercontent.com/AaronYES/aaPanel/main/resource/repair.json
+wget https://raw.githubusercontent.com/DauDau432/Aapanel-Crack/main/repair.json
 chattr +i /www/server/panel/data/repair.json
 }
 function delete-log(){
@@ -37,12 +40,14 @@ bash "/root/bt-uninstall.sh"
 
 function start_menu(){
     clear
-    echo -e " 1. Install aaPanel"
-    echo -e " 2. Crack"
-    echo -e " 3. Delete Log"
-    echo -e " 4. Uninstall aaPanel"
-
-    read -p "Vui Lòng Chọn:" numrun
+    echo ""
+    echo -e "   Chương trình quản lý aapanel"
+    echo -e "   1. Cài đặt bảng điều khiển aaPanel"
+    echo -e "   2. Crack aapanel"
+    echo -e "   3. Xóa nhật ký"
+    echo -e "   4. Gỡ bảng điều khiển aaPanel"
+    echo "--------------------------------"
+    read -p "   Vui Lòng Chọn: " numrun
     case "$numrun" in
         1 )
            install
