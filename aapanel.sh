@@ -3,6 +3,7 @@ function install(){
 clear
 echo ""
 echo "   Chọn hệ điều hành phù hợp!"
+echo ""
 echo "   1. Centos"
 echo "   2. Ubuntu"
 echo "   3. Quay lại"
@@ -46,11 +47,12 @@ function start_menu(){
     clear
     echo ""
     echo -e "   Chương trình quản lý aapanel"
+    echo ""
     echo -e "   1. Cài đặt bảng điều khiển aaPanel"
     echo -e "   2. Crack aapanel"
     echo -e "   3. Xóa nhật ký"
     echo -e "   4. Gỡ bảng điều khiển aaPanel"
-    echo "--------------------------------"
+    echo "-------------------------------------"
     read -p "   Vui Lòng Chọn: " numrun
     case "$numrun" in
         1 )
