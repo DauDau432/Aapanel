@@ -35,11 +35,11 @@ bash "/root/bt-install.sh"
 
 # Hạ cấp tải xuống aapanel GitHub (phiên bản cuối cùng không có quảng cáo)
 function downgrade-aapanel(){
-wget -O "/root/LinuxPanel_EN-6.8.23.zip" "https://ghproxy.com/https://github.com/AaronYES/aapanel/releases/download/1.0/LinuxPanel_EN-6.8.23.zip"
+wget -O "/root/LinuxPanel_EN-6.8.23.zip" "https://github.com/DauDau432/Aapanel/blob/main/LinuxPanel_EN-6.8.23.zip?raw=true"
 red " Tải xuống hoàn tất, hạ cấp."
 unzip LinuxPanel_EN-6.8.23.zip
 cd /root/panel
-wget -O "/root/panel/downgrade.sh" "https://ghproxy.com/https://raw.githubusercontent.com/AaronYES/aapanel/main/script/downgrade.sh" 
+wget -O "/root/panel/downgrade.sh" "https://raw.githubusercontent.com/DauDau432/Aapanel/main/downgrade.sh" 
 bash "/root/panel/downgrade.sh"
 red " Hạ cấp thành công."
 rm /root/LinuxPanel_EN-6.8.23.zip /root/panel/ -rf
@@ -47,30 +47,30 @@ rm /root/LinuxPanel_EN-6.8.23.zip /root/panel/ -rf
 
 ## Bảng điều khiển chùa hạ cấp
 function downgrade-bt(){
-wget -O "/root/LinuxPanel-7.7.0.zip" "https://ghproxy.com/https://github.com/AaronYES/aaPanel/releases/download/1.3/LinuxPanel-7.7.0.zip"
-blue "Download complete, downgrading."
+wget -O "/root/LinuxPanel-7.7.0.zip" "https://github.com/DauDau432/Aapanel/blob/main/LinuxPanel-7.7.0.zip?raw=true"
+blue " Tải xuống hoàn tất, hạ cấp."
 unzip LinuxPanel-7.7.0.zip
 cd /root/panel
 bash /root/panel/update.sh
-red "Downgrade succeeded."
+red " hạ cấp thành công."
 rm /root/LinuxPanel-7.7.0.zip /root/panel/ -rf
 sed -i "s|bind_user == 'True'|bind_user == 'Close'|" /www/server/panel/BTPanel/static/js/index.js
 rm -f /www/server/panel/data/bind.pl
-red "Delete binding succeeded."
+red " Xóa liên kết đã thành công."
 }
 
 # trả tiền bẻ khóa
 function panel-happy(){
-red "Please manually open the software store once before executing"
+red " Vui lòng tự mở kho phần mềm một lần trước khi thực hiện"
 sed -i 's|"endtime": -1|"endtime": 999999999999|g' /www/server/panel/data/plugin.json
 sed -i 's|"pro": -1|"pro": 0|g' /www/server/panel/data/plugin.json
 chattr +i /www/server/panel/data/plugin.json
 chattr -i /www/server/panel/data/repair.json
 rm /www/server/panel/data/repair.json
 cd /www/server/panel/data
-wget https://ghproxy.com/https://raw.githubusercontent.com/AaronYES/aaPanel/main/resource/repair.json
+wget https://raw.githubusercontent.com/DauDau432/Aapanel/main/repair.json
 chattr +i /www/server/panel/data/repair.json
-red "cracked successfully."
+red " Crack thành công."
 }
 
 # làm sạch thùng rác
@@ -82,9 +82,9 @@ red " Nếu bạn muốn xóa tập lệnh này, hãy chạy "rm aapanel.sh -rf"
 
 # Gỡ cài đặt bảng điều khiển
 function uninstall(){
-wget -O "/root/bt-uninstall.sh" "http://download.bt.cn/install/bt-uninstall.sh"
+wget -O "/root/bt-uninstall.sh" "https://raw.githubusercontent.com/DauDau432/Aapanel/main/bt-uninstall.sh"
 bash "/root/bt-uninstall.sh"
-red "Panel uninstalled successfully."
+red " Đã gỡ cài đặt bảng điều khiển thành công."
 }
 
 # Xóa tệp nhật ký và khóa tệp để ngăn ghi
