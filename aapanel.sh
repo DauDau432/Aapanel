@@ -1,75 +1,151 @@
 #! /bin/bash
-function install(){
-clear
-echo ""
-echo "   Chọn hệ điều hành phù hợp!"
-echo ""
-echo "   1. Centos"
-echo "   2. Ubuntu"
-echo "   3. Quay lại"
-echo "--------------------------------"
-read -p "   Vui Lòng Nhập: " num
+# By DauDau
+# https://github.com/DauDau432/AaPanel
 
-    case "${num}" in
-        1) yum install -y wget && wget -O install.sh http://www.aapanel.com/script/install_6.0_en.sh && bash install.sh aapanel
-        ;;
-        2) wget -O install.sh http://www.aapanel.com/script/install-ubuntu_6.0_en.sh && sudo bash install.sh aapanel
-        ;;
-	3) start_menu
-	;;
-        *) install
-        ;;
-    esac
+#màu sắc
+red(){
+    echo -e "\033[31m\033[01m$1\033[0m"
 }
-function crack(){
+green(){
+    echo -e "\033[32m\033[01m$1\033[0m"
+}
+yellow(){
+    echo -e "\033[33m\033[01m$1\033[0m"
+}
+blue(){
+    echo -e "\033[34m\033[01m$1\033[0m"
+}
+purple(){
+    echo -e "\033[35m\033[01m$1\033[0m"
+}
+
+# Cài đặt aapanel
+function aapanel-install(){
+wget -O "/root/aapanel-install.sh" "http://www.aapanel.com/script/install_6.0_en.sh"
+red "Installing the original aapanel panel from the official website."
+bash "/root/aapanel-install.sh"
+}
+
+# Cài đặt BTPanel
+function bt-install(){  
+wget -O "/root/bt-install.sh" "http://download.bt.cn/install/install_6.0.sh"
+red "The original BTPanel is being installed from the official website.."
+bash "/root/bt-install.sh"
+}
+
+# Hạ cấp tải xuống aapanel GitHub (phiên bản cuối cùng không có quảng cáo)
+function downgrade-aapanel(){
+wget -O "/root/LinuxPanel_EN-6.8.23.zip" "https://ghproxy.com/https://github.com/AaronYES/aapanel/releases/download/1.0/LinuxPanel_EN-6.8.23.zip"
+red "Download complete, downgrading."
+unzip LinuxPanel_EN-6.8.23.zip
+cd /root/panel
+wget -O "/root/panel/downgrade.sh" "https://ghproxy.com/https://raw.githubusercontent.com/AaronYES/aapanel/main/script/downgrade.sh" 
+bash "/root/panel/downgrade.sh"
+red "Downgrade succeeded."
+rm /root/LinuxPanel_EN-6.8.23.zip /root/panel/ -rf
+}
+
+## Bảng điều khiển chùa hạ cấp
+function downgrade-bt(){
+wget -O "/root/LinuxPanel-7.7.0.zip" "https://ghproxy.com/https://github.com/AaronYES/aaPanel/releases/download/1.3/LinuxPanel-7.7.0.zip"
+blue "Download complete, downgrading."
+unzip LinuxPanel-7.7.0.zip
+cd /root/panel
+bash /root/panel/update.sh
+red "Downgrade succeeded."
+rm /root/LinuxPanel-7.7.0.zip /root/panel/ -rf
+sed -i "s|bind_user == 'True'|bind_user == 'Close'|" /www/server/panel/BTPanel/static/js/index.js
+rm -f /www/server/panel/data/bind.pl
+red "Delete binding succeeded."
+}
+
+# trả tiền bẻ khóa
+function panel-happy(){
+red "Please manually open the software store once before executing"
 sed -i 's|"endtime": -1|"endtime": 999999999999|g' /www/server/panel/data/plugin.json
 sed -i 's|"pro": -1|"pro": 0|g' /www/server/panel/data/plugin.json
 chattr +i /www/server/panel/data/plugin.json
 chattr -i /www/server/panel/data/repair.json
 rm /www/server/panel/data/repair.json
 cd /www/server/panel/data
-wget https://raw.githubusercontent.com/DauDau432/Aapanel-Crack/main/repair.json
+wget https://ghproxy.com/https://raw.githubusercontent.com/AaronYES/aaPanel/main/resource/repair.json
 chattr +i /www/server/panel/data/repair.json
-bt 1
+red "cracked successfully."
 }
-function delete-log(){
+
+# làm sạch thùng rác
+function clean-up-trash(){
+rm LinuxPanel_EN-6.8.23.zip aapanel-zh-CN.tar.gz chinese.zip aapanel-install.sh bt-install.sh bt-uninstall.sh panel/ -rf
+red " Dọn dẹp thành công."
+red " Nếu bạn muốn xóa tập lệnh này, hãy chạy "rm aapanel.sh -rf""
+}
+
+# Gỡ cài đặt bảng điều khiển
+function uninstall(){
+wget -O "/root/bt-uninstall.sh" "http://download.bt.cn/install/bt-uninstall.sh"
+bash "/root/bt-uninstall.sh"
+red "Panel uninstalled successfully."
+}
+
+# Xóa tệp nhật ký và khóa tệp để ngăn ghi
+function log(){
 echo "" > /www/server/panel/script/site_task.py
 chattr +i /www/server/panel/script/site_task.py
 rm -rf /www/server/panel/logs/request/*
 chattr +i -R /www/server/panel/logs/request
 }
-function uninstall(){
-wget -O "/root/bt-uninstall.sh" "http://download.bt.cn/install/bt-uninstall.sh"
-bash "/root/bt-uninstall.sh"
-}
 
+# menu
 function start_menu(){
     clear
-    echo ""
-    echo -e "   Chương trình quản lý aapanel"
-    echo ""
-    echo -e "   1. Cài đặt bảng điều khiển aaPanel"
-    echo -e "   2. Crack aapanel"
-    echo -e "   3. Xóa nhật ký"
-    echo -e "   4. Gỡ bảng điều khiển aaPanel"
-    echo "-------------------------------------"
-    read -p "   Vui Lòng Chọn: " numrun
-    case "$numrun" in
+    purple " Cảm ơn bạn đã sử dụng công cụ aaPanel"
+    purple " https://github.com/DauDau432/AaPanel"
+    yellow " ————————————————————————————————————————————————"
+    green " 1. Cài đặt aaPanel trên CentOS/Debian/Ubuntu"
+    green " 2. Cài đặt BTPanel trên CentOS/Debian/Ubuntu"
+    yellow " ————————————————————————————————————————————————"
+    green " 3. Hạ cấp xuống phiên bản aaPanel 6.8.23"
+    green " 4. Hạ cấp xuống phiên bản BTPanel 7.7.0"
+    green " 5. Crack"
+    green " 6. Xóa tệp nhật ký, khóa quyền ghi tệp"
+    yellow " ————————————————————————————————————————————————"
+    green " 7. Gỡ cài đặt bảng điều khiển aaPanel"
+    green " 8. Script dọn dẹp tạo tập tin rác"
+    green " 0. Thoát"
+
+    echo
+    read -p " Vui lòng nhập số: " menuNumberInput
+    case "$menuNumberInput" in
         1 )
-           install
+           aapanel-install
 	    ;;
         2 )
-           crack
+           bt-install
         ;;
         3 )
-           delete-log
+           downgrade-aapanel
         ;;
         4 )
+           downgrade-bt
+        ;;
+        5 )
+           panel-happy
+        ;;
+        6 )
+           log
+        ;;
+        7 )
            uninstall
         ;;
-        
+        8 )
+           clean-up-trash
+        ;;
+        0 )
+            exit 1
+        ;;
         * )
             clear
+            red " Vui lòng nhập số chính xác!"
             start_menu
         ;;
     esac
