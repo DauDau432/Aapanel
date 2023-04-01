@@ -77,7 +77,7 @@ red " Crack thành công."
 function clean-up-trash(){
 rm -rf LinuxPanel_EN-6.8.23.zip aapanel-zh-CN.tar.gz chinese.zip aapanel-install.sh bt-install.sh bt-uninstall.sh
 red " Dọn dẹp thành công."
-red " Nếu bạn muốn xóa tập lệnh này, hãy chạy "rm -rf aapanel.sh"
+red " Nếu bạn muốn xóa tập lệnh này, hãy chạy  rm -rf aapanel.sh"
 }
 
 # 7 Gỡ cài đặt bảng điều khiển
@@ -98,6 +98,7 @@ chattr +i -R /www/server/panel/logs/request
 # menu
 function start_menu(){
     clear
+    echo ""
     purple " Cảm ơn bạn đã sử dụng công cụ aaPanel"
     purple " https://github.com/DauDau432/AaPanel"
     yellow " ————————————————————————————————————————————————"
@@ -141,12 +142,12 @@ function start_menu(){
            clean-up-trash
         ;;
         0 )
-            exit 1
+           exit 1
         ;;
         * )
-            clear
-            red " Vui lòng nhập số chính xác!"
-            start_menu
+           clear
+           red " Vui lòng nhập số chính xác!"
+           start_menu
         ;;
     esac
 }
