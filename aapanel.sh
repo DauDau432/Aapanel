@@ -73,11 +73,12 @@ chattr +i /www/server/panel/data/repair.json
 red " Crack thành công."
 }
 
-# 6 làm sạch thùng rác
-function clean-up-trash(){
-rm -rf LinuxPanel_EN-6.8.23.zip aapanel-zh-CN.tar.gz chinese.zip aapanel-install.sh bt-install.sh bt-uninstall.sh
-red " Dọn dẹp thành công."
-red " Nếu bạn muốn xóa tập lệnh này, hãy chạy  rm -rf aapanel.sh"
+# 6 Xóa tệp nhật ký và khóa tệp để ngăn ghi
+function log(){
+echo "" > /www/server/panel/script/site_task.py
+chattr +i /www/server/panel/script/site_task.py
+rm -rf /www/server/panel/logs/request/*
+chattr +i -R /www/server/panel/logs/request
 }
 
 # 7 Gỡ cài đặt bảng điều khiển
@@ -87,12 +88,11 @@ bash "/root/bt-uninstall.sh"
 red " Đã gỡ cài đặt bảng điều khiển thành công."
 }
 
-# 8 Xóa tệp nhật ký và khóa tệp để ngăn ghi
-function log(){
-echo "" > /www/server/panel/script/site_task.py
-chattr +i /www/server/panel/script/site_task.py
-rm -rf /www/server/panel/logs/request/*
-chattr +i -R /www/server/panel/logs/request
+# 8 làm sạch thùng rác
+function clean-up-trash(){
+rm -rf LinuxPanel_EN-6.8.23.zip aapanel-zh-CN.tar.gz chinese.zip aapanel-install.sh bt-install.sh bt-uninstall.sh
+red " Dọn dẹp thành công."
+red " Nếu bạn muốn xóa tập lệnh này, hãy chạy  rm -rf aapanel.sh"
 }
 
 # menu
