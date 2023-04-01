@@ -19,21 +19,21 @@ purple(){
     echo -e "\033[35m\033[01m$1\033[0m"
 }
 
-# Cài đặt aapanel
+# 1 Cài đặt aapanel
 function aapanel-install(){
 wget -O "/root/aapanel-install.sh" "http://www.aapanel.com/script/install_6.0_en.sh"
 red " Cài đặt bảng điều khiển aapanel từ trang web chính thức."
 bash "/root/aapanel-install.sh"
 }
 
-# Cài đặt BTPanel
+# 2 Cài đặt BTPanel
 function bt-install(){  
 wget -O "/root/bt-install.sh" "http://download.bt.cn/install/install_6.0.sh"
 red " BTPanel đang được cài đặt từ trang web chính thức.."
 bash "/root/bt-install.sh"
 }
 
-# Hạ cấp tải xuống aapanel GitHub (phiên bản cuối cùng không có quảng cáo)
+# 3 Hạ cấp tải xuống aapanel GitHub (phiên bản cuối cùng không có quảng cáo)
 function downgrade-aapanel(){
 wget -O "/root/LinuxPanel_EN-6.8.23.zip" "https://github.com/DauDau432/Aapanel/blob/main/LinuxPanel_EN-6.8.23.zip?raw=true"
 red " Tải xuống hoàn tất, hạ cấp."
@@ -45,7 +45,7 @@ red " Hạ cấp thành công."
 rm /root/LinuxPanel_EN-6.8.23.zip /root/panel/ -rf
 }
 
-## Bảng điều khiển chùa hạ cấp
+# 4 Bảng điều khiển chùa hạ cấp
 function downgrade-bt(){
 wget -O "/root/LinuxPanel-7.7.0.zip" "https://github.com/DauDau432/Aapanel/blob/main/LinuxPanel-7.7.0.zip?raw=true"
 blue " Tải xuống hoàn tất, hạ cấp."
@@ -59,7 +59,7 @@ rm -f /www/server/panel/data/bind.pl
 red " Xóa liên kết đã thành công."
 }
 
-# trả tiền bẻ khóa
+# 5 bẻ khóa trả tiền 
 function panel-happy(){
 red " Vui lòng tự mở kho phần mềm một lần trước khi thực hiện"
 sed -i 's|"endtime": -1|"endtime": 999999999999|g' /www/server/panel/data/plugin.json
@@ -73,21 +73,21 @@ chattr +i /www/server/panel/data/repair.json
 red " Crack thành công."
 }
 
-# làm sạch thùng rác
+# 6 làm sạch thùng rác
 function clean-up-trash(){
-rm LinuxPanel_EN-6.8.23.zip aapanel-zh-CN.tar.gz chinese.zip aapanel-install.sh bt-install.sh bt-uninstall.sh panel/ -rf
+rm -rf LinuxPanel_EN-6.8.23.zip aapanel-zh-CN.tar.gz chinese.zip aapanel-install.sh bt-install.sh bt-uninstall.sh
 red " Dọn dẹp thành công."
-red " Nếu bạn muốn xóa tập lệnh này, hãy chạy "rm aapanel.sh -rf""
+red " Nếu bạn muốn xóa tập lệnh này, hãy chạy "rm -rf aapanel.sh"
 }
 
-# Gỡ cài đặt bảng điều khiển
+# 7 Gỡ cài đặt bảng điều khiển
 function uninstall(){
 wget -O "/root/bt-uninstall.sh" "https://raw.githubusercontent.com/DauDau432/Aapanel/main/bt-uninstall.sh"
 bash "/root/bt-uninstall.sh"
 red " Đã gỡ cài đặt bảng điều khiển thành công."
 }
 
-# Xóa tệp nhật ký và khóa tệp để ngăn ghi
+# 8 Xóa tệp nhật ký và khóa tệp để ngăn ghi
 function log(){
 echo "" > /www/server/panel/script/site_task.py
 chattr +i /www/server/panel/script/site_task.py
