@@ -22,14 +22,14 @@ purple(){
 # Cài đặt aapanel
 function aapanel-install(){
 wget -O "/root/aapanel-install.sh" "http://www.aapanel.com/script/install_6.0_en.sh"
-red " Cài đặt bảng điều khiển aapanel ban đầu từ trang web chính thức."
+red " Cài đặt bảng điều khiển aapanel từ trang web chính thức."
 bash "/root/aapanel-install.sh"
 }
 
 # Cài đặt BTPanel
 function bt-install(){  
 wget -O "/root/bt-install.sh" "http://download.bt.cn/install/install_6.0.sh"
-red " BTPanel ban đầu đang được cài đặt từ trang web chính thức.."
+red " BTPanel đang được cài đặt từ trang web chính thức.."
 bash "/root/bt-install.sh"
 }
 
