@@ -98,7 +98,6 @@ chattr +i -R /www/server/panel/logs/request
 # menu
 function start_menu(){
     clear
-    echo ""
     purple " Cảm ơn bạn đã sử dụng công cụ aaPanel"
     purple " https://github.com/DauDau432/AaPanel"
     yellow " ————————————————————————————————————————————————"
