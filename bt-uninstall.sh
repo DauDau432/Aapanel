@@ -4,18 +4,17 @@ export PATH
 
 Remove_Bt(){
 	if [ ! -f "/etc/init.d/bt" ] || [ ! -d "/www/server/panel" ]; then
-		echo -e "此服务器没有安装宝塔！"
-		echo -e "This server does not install bt-panel"
+		echo -e " Máy chủ này không cài đặt bt-panel"
 		exit;
 	fi
 
 	if [ -f "/etc/init.d/bt_syssafe" ]; then
-		echo -e "此服务器装有宝塔系统加固可能导致无法正常卸载，请在面板卸载后再执行卸载命令！"
+		echo -e " Máy chủ này được cài đặt với hệ thống gia cố hệ thống bt-panel, điều này có thể khiến nó không thể gỡ cài đặt bình thường, vui lòng thực hiện lệnh gỡ cài đặt sau khi bảng điều khiển được gỡ cài đặt!"
 		exit;
 	fi
 
 	if [ -f "/etc/init.d/bt_tamper_proof" ]; then
-		echo -e "此服务器装有宝塔网站防篡改可能导致无法正常卸载，请在面板卸载后再执行卸载命令！"
+		echo -e " Máy chủ này được cài đặt tính năng chống giả mạo trang web của bt-panel, điều này có thể dẫn đến việc gỡ cài đặt bình thường không thành công, vui lòng thực hiện lệnh gỡ cài đặt sau khi bảng điều khiển được gỡ cài đặt!"
 		exit;
 	fi
 
@@ -27,12 +26,10 @@ Remove_Bt(){
 	fi
 	rm -rf /www/server/panel
 	rm -f /etc/init.d/bt 
-	echo -e "宝塔面板已卸载成功"
-	echo -e "bt-panel uninstall success"
+	echo -e " bt-panel gỡ cài đặt thành công"
 }
 Remove_Rpm(){
-	echo -e "查询已安装rpm包.."
-	echo -e "Find installed packages"
+	echo -e " Tìm các gói rpm đã cài đặt..."
 	for lib in bt-nginx bt-httpd bt-mysql bt-curl bt-AliSQL AliSQL-master bt-mariadb bt-php-5.2 bt-php-5.3 bt-php-5.4 bt-php-5.5 bt-php-5.6 bt-php-7.0 bt-php-7.1
 	do
 		rpm -qa |grep ${lib} > ${lib}.pl
@@ -45,8 +42,7 @@ Remove_Rpm(){
 	done
 	yum remove bt-openssl* -y
 	yum remove bt-php* -y
-	echo -e "清理完毕"
-	echo -e "Clean over"
+	echo -e " Dọn dẹp"
 }
 
 Remove_Service(){
@@ -93,21 +89,19 @@ Remove_Service(){
 		echo -e "node.js" "\033[32mclean\033[0m"
 	fi
 
-	echo "清除面板运行环境完毕"
+	echo " Xóa môi trường thời gian chạy bảng điều khiển hoàn tất"
 }
 Remove_Data(){
 	rm -rf /www/server/data
 	rm -rf /www/wwwlogs
 	rm -rf /www/wwwroot
 }
- 
-#echo -e "What you want to do ?(Default:1)"
-echo "1) 卸载宝塔"  
-echo "2) 卸载宝塔及运行环境(可能影响站点、数据库及其他数据)"
-#echo "3) 卸载宝塔及运行环境并清除所有站点相关数据"
-echo "*请检查安全类软件是否关闭，否正可能导致无法正常卸载 "
+
+echo " 1) Gỡ cài đặt bt-panel"  
+echo " 2) Gỡ cài đặt bt-panel và môi trường hoạt động (có thể ảnh hưởng đến trang web, cơ sở dữ liệu và dữ liệu khác)"
+echo " * Vui lòng kiểm tra xem phần mềm bảo mật đã được đóng chưa, nếu không có thể dẫn đến việc không thể gỡ cài đặt bình thường "
 echo "=================================================" 
-read -p "请选择你要进行的操作(1-2 默认:1): " action; 
+read -p " Vui lòng chọn (1-2 mặc định 1): " action; 
 
 case $action in
 	'1')
