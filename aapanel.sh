@@ -64,8 +64,6 @@ function panel-happy(){
     red " Đang thực hiện crack..."
     # crack
     curl https://bt.maxcdn.top/install/update_7.x_en.sh | bash
-    # fix lỗi
-    curl -v https://brandnew.aapanel.com
     red " Crack thành công."
 }
 
